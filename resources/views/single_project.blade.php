@@ -6,37 +6,50 @@
 </head>
 <body>
 	<table class="table table-bordered table-striped">
-		    <thead>
-		      <tr>
-		        <th>ID</th>
-		        <th>Title</th>
-		        <th>Author</th>
-		        <th>Description</th>
-		        <th>Status</th>
-		      </tr>
-		    </thead>
+	    <thead>
+	      <tr>
+	        <th>ID</th>
+	        <th>Title</th>
+	        <th>Author</th>
+	        <th>Description</th>
+	        <th>Status</th>
+	      </tr>
+	    </thead>
 
-		    <tbody>
-	    		<div class="project">
-	    			<div class="row">
-    					{{ $project_single[0]->id }};
-    					{{ $project_single[0]->title }};
-    					{{ $project_single[0]->author }};
-    					{{ $project_single[0]->description }};
-    					{{ $project_single[0]->status }};
-	    			</div>
-	    		</div>
+	    <tbody>
+	    	<tr>
+	    		<th>
+	    			<td>{{ $project_single[0]->id }};</td>
+					<td>{{ $project_single[0]->title }};</td>
+					<td>{{ $project_single[0]->author }};</td>
+					<td>{{ $project_single[0]->description }};</td>
+					<td>{{ $project_single[0]->status }};</td>
+	    		</th>		    		
+	    	</tr>
+		</tbody>
+	</table>	
 
-	    		<div class="messages">
-	    			<div class="row">
+	<table>
+		<thead>
+			<th>Messages</th>
+		</thead>
 
-	    				@for($i=0; $i < count($project_messages); $i++)
-	    					{{$project_messages[$i]->content}};
-	    				@endfor
-	    			</div>
-	    		</div>		    					    			    					    	 
-		    </tbody>
-	  </table>
+		<tbody>
+			<tr>
+				<td>
+					@for($i=0; $i < count($project_messages); $i++)
+						{{$project_messages[$i]->content}};
+					@endfor
+				</td>					
+			</tr>
+		</tbody>
+	</table>
+
+
+
+								  					    			    					    	 
+		    
+	  
 
 	  <form action = "/insert_message" method="post" class="form-group">
 	    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>"><input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">	

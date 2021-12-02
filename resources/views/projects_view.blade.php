@@ -19,20 +19,18 @@
 
 		    <tbody>
 		    	@foreach ($projects as $project)
-			    	<a href="{{ route('projects.show', $project->id) }}"></a>
-			    		<div class="project">
-			    			<div class="row">
-		    					{{ $project->id }};
-		    					{{ $project->title }};
-		    					{{ $project->author }};
-		    					{{ $project->description }};
-		    					{{ $project->status }};
-			    			</div>
-			    		</div>
-			    	</a>		    					    			    					    	 
-			    @endforeach
+		    		<tr>
+	    				<th>		    				
+	    					<td><a href="{{ route('projects.show', $project->id) }}">{{ $project->id }};</td></a>
+	    					<td>{{ $project->title }};</td>
+	    					<td>{{ $project->author }};</td>
+	    					<td>{{ $project->description }};</td>
+	    					<td>{{ $project->status }};</td>
+	    				</th>
+	    			</tr>  				    			    					    			    					    	 
+	    		@endforeach	  		    	  			  	
 		    </tbody>
-	  </table>
+	  	</table>
 	</div>
 </body>
 </html>
