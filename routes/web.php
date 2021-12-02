@@ -25,3 +25,5 @@ Route::get('/messages_view','MessagesViewController@index');
 
 Route::get('/insert_message','InsertMessageController@insertForm');
 Route::post('/insert_message','InsertMessageController@formData');
+
+Route::get('/projects/{projects}', 'ProjectController@show')->name('projects.show');;

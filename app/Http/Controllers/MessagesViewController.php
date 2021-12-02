@@ -13,6 +13,8 @@ class MessagesViewController extends Controller
     public function index(){
         $messages = DB::select('select * from messages');
 
+        var_dump($messages);
+ 
         return view('messages_view', ['messages' => $messages]);  
     }    
 }
