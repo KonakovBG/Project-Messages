@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\InsertProjectController;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Project;
-use App\Models\Message;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
     /**
     * Return all projects
     * 
-    * @return use App\Models\Project;
+    * @return App\Models\Project;
     **/    
     public function index()
     {
@@ -26,7 +27,7 @@ class ProjectController extends Controller
     /**
     * Return project create form
     * 
-    * @return use App\Models\Project; 
+    * @return App\Models\Project; 
     **/
     public function create()
     {
@@ -36,7 +37,7 @@ class ProjectController extends Controller
     /**
     * Return single project
     * 
-    * @return use App\Models\Project;
+    * @return App\Models\Project;
     **/    
     public function show(Project $project)
     {
@@ -47,18 +48,18 @@ class ProjectController extends Controller
     /**
     * Store project in database
     * 
-    * @return use App\Models\Project;
+    * @param  \Illuminate\Http\Request $request
+    * @param  \App\Todo $todo 
+    * @return App\Models\Project;
     **/ 
-    public function store(Request $request, Project $project)
+    public function store(StoreProjectRequest $request, Project $project)
     {
-        $title = $request->input('title');
-        $author = $request->input('author');
-        $description = $request->input('description');
-        $status = $request->input('status');
-
-        $data = array('title'=>$title,'author'=>$author,'description'=>$description, 'status'=>$status);
-
-        Project::insert($data);
+        Project::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'author' => $request->input('author'),
+            'status' => $request->input('status'),
+        ]);
 
         return redirect()
             ->route('projects.index');                    

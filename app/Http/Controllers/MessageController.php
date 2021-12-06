@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\InsertProjectController;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Message;
 use App\Models\Project;
+
 
 class MessageController extends Controller
 {   
     /**
     * Return all messages 
     * 
-    * @return use App\Models\Message;
+    * @return App\Models\Message;
     **/
     public function index()
     {
@@ -26,7 +29,7 @@ class MessageController extends Controller
     /**
     * Return message create form 
     * 
-    * @return use App\Models\Message;
+    * @return App\Models\Message;
     **/
     public function create()
     {
@@ -36,18 +39,19 @@ class MessageController extends Controller
     /**
     * Store message in database
     * 
-    * @return use App\Http\Controllers\InsertProjectController;
+    * @param  \Illuminate\Http\Request $request
+    * @param  \App\Message $message 
+    * @return App\Http\Controllers\InsertProjectController;
+    * 
     **/
-    public function store(Request $request, Project $project)
+    public function store(StoreMessageRequest $request, Message $message)
     {
-        $project_id = $request->input('project_id');
-        $author = $request->input('author');
-        $content = $request->input('content');
-
-        $data = array('project_id'=>$project_id,'author'=>$author,'content'=>$content);
-
-        Message::insert($data); 
-
+        Message::create([
+            'author' => $request->input('author'),
+            'content' => $request->input('content'),
+            'project_id' => $request->input('project_id')       
+        ]);
+ 
         return redirect()
             ->route('messages.index');    
     }

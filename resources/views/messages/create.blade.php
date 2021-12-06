@@ -5,9 +5,19 @@
 	<title></title>
 </head>
 <body>
+    
+<!-- Show any errors -->
+@if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif    
 
 <!-- Mesage store form -->
-
 <form action = "{{ route('messages.store') }}" method="post" class="form-group">
     @csrf	
 

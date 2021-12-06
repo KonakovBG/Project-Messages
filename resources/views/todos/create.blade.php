@@ -6,6 +6,17 @@
 </head>
 <body>
 
+<!-- Show any errors -->
+@if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif    
+
 <!-- Store todo in database -->
 <form action = "{{ route('todos.store') }}" method="post" class="form-group">
     @csrf	

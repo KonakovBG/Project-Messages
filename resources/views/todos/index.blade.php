@@ -24,7 +24,7 @@
 	    		@foreach ($todos as $todo)
 		    		<tr>
 		    			<td>{{$todo->id}}</td>
-    					<td><a href="{{ route('todoes.show', $todo) }}">{{$todo->project_id}}</a></td>
+    					<td>{{-- <a href="{{ route('todos.show', $todo) }}">{{$todo->project_id}}</a> --}}</td>
     					<td>{{$todo->title}}</td>
     					<td>{{$todo->author}}</td>
     					<td>{{$todo->content}}</td> 	
