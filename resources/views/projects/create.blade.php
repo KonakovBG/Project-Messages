@@ -6,9 +6,9 @@
 </head>
 <body>
 
-<form action = "/insert_project" method="post" class="form-group" style="width:70%; margin-left:15%;">
-
-    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>"><input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">	
+<form action = "{{ route('projects.store') }}" method="post" class="form-group">
+    @csrf
+    
     <label class="form-group">Title:</label>
     <input type="text" name="title">
     
