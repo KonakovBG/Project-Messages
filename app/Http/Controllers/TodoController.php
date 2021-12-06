@@ -8,22 +8,45 @@ use App\Models\Project;
 
 class TodoController extends Controller
 {
-    public function index(){
+    /**
+    * Return all todos 
+    * 
+    * @return use App\Models\Todo;
+    **/
+    public function index()
+    {
         return view('todoes/index',[
             'todoes' => Todo::all()
         ]);
     }
 
-    public function create(){
+    /**
+    * Return todo create form
+    * 
+    * @return use App\Models\Todo;
+    **/
+    public function create()
+    {
         return view('todoes/create');
     }
 
-    public function show(Todo $todo){
+    /**
+    * Return single todo
+    * 
+    * @return use App\Models\Todo; 
+    **/
+    public function show(Todo $todo)
+    {
         return view('todoes/show',['todoes' => $todo]);
-
     }
 
-    public function store(Request $request, Todo $todo){
+    /**
+    * Store todo in database
+    * 
+    * @return use App\Http\Controllers\InsertProjectController;
+    **/
+    public function store(Request $request, Todo $todo)
+    {
         $project_id = $request->input('project_id');
         $title = $request->input('title');
         $author = $request->input('author');
@@ -35,11 +58,16 @@ class TodoController extends Controller
         Todo::insert($data);
 
         return redirect()
-            ->route('todoes.index');
-                     
+            ->route('todoes.index');                    
     }
 
-    public function update(Request $request, Todo $todo){
+    /**
+    * Update todo status
+    * 
+    * @return use App\Models\Todo;  
+    **/
+    public function update(Request $request, Todo $todo)
+    {
         $todo->update([
             'status' => 'finished'
         ]);

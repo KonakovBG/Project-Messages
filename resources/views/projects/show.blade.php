@@ -5,82 +5,89 @@
 	<title></title>
 </head>
 <body>
-	<table class="table table-bordered table-striped">
-	    <thead>
-	      <tr>
-	        <th>ID</th>
-	        <th>Title</th>
-	        <th>Author</th>
-	        <th>Description</th>
-	        <th>Status</th>
-	      </tr>
+
+<!-- Return single projects -->	
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Description</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    	<tr>
+    		<th>
+    			<td>{{$project->id}}</td>
+    			<td>{{$project->title}}</td>
+    			<td>{{$project->author}}</td>
+    			<td>{{$project->description}}</td>
+    		</th>		    		
+    	</tr>
+	</tbody>
+</table>
+
+<!-- Return project messages -->		
+
+<table>
+	<thead>
+		<thead>
+			<tr>
+		   		<th>Messages</th>
+		    </tr>
 	    </thead>
+	</thead>
 
-	    <tbody>
-	    	<tr>
-	    		<th>
-	    			<td>{{$project->id}}</td>
-	    			<td>{{$project->title}}</td>
-	    			<td>{{$project->author}}</td>
-	    			<td>{{$project->description}}</td>
-	    		</th>		    		
-	    	</tr>
-		</tbody>
-	</table>	
+	<tbody>			
+		@foreach($project->messages as $message)
+			<tr>
+				<td>{{$message->author}}.----><td>
+				<td>{{$message->content}}<td>				
+			</tr>
+		@endforeach				
+	</tbody>
+</table>
 
-	<table>
-		<thead>
-			<thead>
+<!-- Return project todos -->	
+<table>
+	<thead>
+		<th>ToDo-es</th>
+	</thead>
+
+	<tbody>			
+			@foreach($project->toDoEs as $todo)
 				<tr>
-			   		<th>Messages</th>
-			    </tr>
-		    </thead>
-		</thead>
+					<td>{{$todo->title}}.----><td>
+					<td>{{$todo->author}}<td>
+					<td>{{$todo->content}}<td>
+					<td>{{$todo->status}}<td>
+					<form action="{{ route('todos.update', $todo )}}" method="post">
+						@csrf
 
-		<tbody>			
-			@foreach($project->messages as $message)
-				<tr>
-					<td>{{$message->author}}.----><td>
-					<td>{{$message->content}}<td>				
+						<button type="submit" >Finish</button>
+					</form>	
 				</tr>
-			@endforeach				
-		</tbody>
-	</table>
+			@endforeach</td>							
+	</tbody>
+</table>
 
-	<table>
-		<thead>
-			<th>ToDo-es</th>
-		</thead>
+<!-- Message store form -->	  
+<form action="{{ route('messages.store') }}" method="post" class="form-group">
+    @csrf
 
-		<tbody>			
-				@foreach($project->toDoEs as $todo)
-					<tr>
-						<td>{{$todo->title}}.----><td>
-						<td>{{$todo->author}}<td>
-						<td>{{$todo->content}}<td>
-						<td>{{$todo->status}}<td>
-						<form action="{{ route('todoes.update', $todo )}}" method="post">
-							@csrf
+    <input type="hidden" name="project_id" value="{{ $project->id }}" />
 
-							<button type="submit" >Finish</button>
-						</form>	
-					</tr>
-				@endforeach</td>							
-		</tbody>
-	</table>  
+    <label>Author</label>
+    <input type="text" name="author">
 
-	<form action="{{ route('messages.store') }}" method="post" class="form-group">
-	    @csrf
+    <label>Content</label>
+    <input type="text"  name="content">
 
-	    <input type="hidden" name="project_id" value="{{ $project->id }}" />
+    <button type="submit">Submit</button>
+</form>
 
-	    <label>Author</label>
-	    <input type="text" name="author">
-
-	    <label>Content</label>
-	    <input type="text"  name="content">
-
-	    <button type="submit">Submit</button>
- 	</form>
 </body>
 </html>

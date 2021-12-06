@@ -10,18 +10,36 @@ use App\Models\Message;
 use App\Models\Project;
 
 class MessageController extends Controller
-{
-    public function index(){
+{   
+    /**
+    * Return all messages 
+    * 
+    * @return use App\Models\Message;
+    **/
+    public function index()
+    {
         return view('messages/index', [
             'messages' => Message::all()
         ]);  
     }
 
-    public function create(){
+    /**
+    * Return message create form 
+    * 
+    * @return use App\Models\Message;
+    **/
+    public function create()
+    {
         return view('messages/create');
     }
-    
-    public function store(Request $request, Project $project){
+
+    /**
+    * Store message in database
+    * 
+    * @return use App\Http\Controllers\InsertProjectController;
+    **/
+    public function store(Request $request, Project $project)
+    {
         $project_id = $request->input('project_id');
         $author = $request->input('author');
         $content = $request->input('content');

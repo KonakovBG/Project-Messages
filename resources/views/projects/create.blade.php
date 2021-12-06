@@ -4,8 +4,9 @@
 	<meta charset="utf-8">
 	<title></title>
 </head>
-<body>
+<body>   
 
+<!-- Store project in database -->
 <form action = "{{ route('projects.store') }}" method="post" class="form-group">
     @csrf
     

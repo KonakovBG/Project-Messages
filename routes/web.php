@@ -51,17 +51,17 @@ Route::post('/messages', 'MessageController@store')
  * ToDoEs
  */
 
-Route::get('/todoes', 'TodoController@index')
-    ->name('todoes.index');
+Route::get('/todos', 'TodoController@index')
+    ->name('todos.index');
 
-Route::get('/todoes/create', 'TodoController@create')
-    ->name('todoes.create');
+Route::get('/todos/create', 'TodoController@create')
+    ->name('todos.create');
 
-Route::post('/todoes', 'TodoController@store')
-    ->name('todoes.store');
+Route::post('/todos', 'TodoController@store')
+    ->name('todos.store');
 
-Route::get('/todoes/{todo}', 'TodoController@show')
+Route::get('/todos/{todo}', 'TodoController@show')
     ->name('todoes.show');
 
-Route::post('/todoes/{todo}', 'TodoController@update')
-    ->name('todoes.update');
+Route::post('/todos/{todo}', 'TodoController@update')
+    ->name('todos.update');

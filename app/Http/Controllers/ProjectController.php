@@ -11,22 +11,46 @@ use App\Models\Message;
 
 class ProjectController extends Controller
 {
-    public function index(){
+    /**
+    * Return all projects
+    * 
+    * @return use App\Models\Project;
+    **/    
+    public function index()
+    {
         return view('projects/index', [
             'projects' => Project::all()
         ]);
     } 
 
-    public function create(){
+    /**
+    * Return project create form
+    * 
+    * @return use App\Models\Project; 
+    **/
+    public function create()
+    {
         return view('projects/create');
     }
-    
-    public function show(Project $project){
+
+    /**
+    * Return single project
+    * 
+    * @return use App\Models\Project;
+    **/    
+    public function show(Project $project)
+    {
         return view('projects/show',['project' => $project]);
 
     }
 
-    public function store(Request $request, Project $project){
+    /**
+    * Store project in database
+    * 
+    * @return use App\Models\Project;
+    **/ 
+    public function store(Request $request, Project $project)
+    {
         $title = $request->input('title');
         $author = $request->input('author');
         $description = $request->input('description');
@@ -37,7 +61,6 @@ class ProjectController extends Controller
         Project::insert($data);
 
         return redirect()
-            ->route('projects.index');
-                     
+            ->route('projects.index');                    
     }
 }

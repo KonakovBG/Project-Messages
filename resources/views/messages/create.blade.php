@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<!-- Mesage store form -->
+
 <form action = "{{ route('messages.store') }}" method="post" class="form-group">
     @csrf	
 

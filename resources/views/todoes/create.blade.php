@@ -6,7 +6,8 @@
 </head>
 <body>
 
-<form action = "{{ route('todoes.store') }}" method="post" class="form-group">
+<!-- Store todo in database -->
+<form action = "{{ route('todos.store') }}" method="post" class="form-group">
     @csrf	
 
     <label class="form-group">Project ID</label>
