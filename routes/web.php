@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homepage');
-});
+})->name('home');
 
 /*
  * Projects
@@ -65,3 +65,8 @@ Route::get('/todos/{todo}', 'TodoController@show')
 
 Route::post('/todos/{todo}', 'TodoController@update')
     ->name('todos.update');
+
+/*
+ * Authentication
+ */
+   
