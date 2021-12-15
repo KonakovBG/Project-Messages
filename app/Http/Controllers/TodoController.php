@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Models\Project;
 use App\Http\Requests\StoreTodoRequest;
+use App\Domain\Todos\CreateTodoAction;
+use App\Domain\Todos\UpdateTodoStatusAction;
 
 class TodoController extends Controller
 {
@@ -46,18 +48,18 @@ class TodoController extends Controller
     * 
     * @return App\Http\Controllers\InsertProjectController;
     **/
-    public function store(StoreTodoRequest $request, Todo $todo)
+    public function store(StoreTodoRequest $request, Project $project, CreateTodoAction $action)
     {
-        Todo::create([
-        'title' => $request->input('title'),
-        'content' => $request->input('content'),
-        'author' => $request->input('author'),
-        'status' => $request->input('status'),
-        'project_id' => $request->input('project_id')
+        $todo = $action->handle([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'author' => $request->input('author'),
+            'status' => $request->input('status'),
+            'project_id' => $project->id
     ]);
 
         return redirect()
-            ->route('todos/index');                    
+            ->route('projects.show',$project);
     }
 
     /**
@@ -67,13 +69,13 @@ class TodoController extends Controller
     * @param  \App\Todo $todo 
     * @return App\Models\Todo;  
     **/
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, Todo $todo, UpdateTodoStatusAction $action)
     {
         $todo->update([
             'status' => 'finished'
         ]);
 
         return redirect()
-            ->route('projects/index');
+            ->route('projects.index');
     }
 }

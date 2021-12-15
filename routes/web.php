@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('homepage');
-})->name('home');
+})->name('homepage');
 
 /*
  * Projects
@@ -41,10 +41,10 @@ Route::get('/messages', 'MessageController@index')
 // Route::get('/messages/{message}', 'MessageController@show')
 //     ->name('messages.show');
 
-Route::get('/messages/create', 'MessageController@create')
+Route::get('/messages/create/', 'MessageController@create')
     ->name('messages.create');
 
-Route::post('/messages', 'MessageController@store')
+Route::post('/messages/store/{project}', 'MessageController@store')
     ->name('messages.store');
 
 /*
@@ -57,7 +57,7 @@ Route::get('/todos', 'TodoController@index')
 Route::get('/todos/create', 'TodoController@create')
     ->name('todos.create');
 
-Route::post('/todos', 'TodoController@store')
+Route::post('/todos/store/{project}', 'TodoController@store')
     ->name('todos.store');
 
 Route::get('/todos/{todo}', 'TodoController@show')

@@ -10,6 +10,7 @@ use App\Http\Controllers\InsertProjectController;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Message;
 use App\Models\Project;
+use App\Domain\Messages\CreateMessageAction;
 
 
 class MessageController extends Controller
@@ -44,15 +45,11 @@ class MessageController extends Controller
     * @return App\Http\Controllers\InsertProjectController;
     * 
     **/
-    public function store(StoreMessageRequest $request, Message $message)
-    {
-        Message::create([
-            'author' => $request->input('author'),
-            'content' => $request->input('content'),
-            'project_id' => $request->input('project_id')       
-        ]);
+    public function store(StoreMessageRequest $request, Project $project, CreateMessageAction $action)
+    {   
+        $action->handle($todo);  
  
         return redirect()
-            ->route('messages.index');    
+            ->route('projects.show',$project);    
     }
 }

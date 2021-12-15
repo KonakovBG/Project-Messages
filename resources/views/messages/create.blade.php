@@ -18,11 +18,8 @@
 @endif    
 
 <!-- Mesage store form -->
-<form action = "{{ route('messages.store') }}" method="post" class="form-group">
+<form action = "{{ route('messages.store', $project) }}" method="post" class="form-group">
     @csrf	
-
-    <label class="form-group">Project ID</label>
-    <input type="text" name="project_id">
     
     <label>Author</label>
     <input type="text" name="author">

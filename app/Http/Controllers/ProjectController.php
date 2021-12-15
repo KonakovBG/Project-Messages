@@ -9,6 +9,7 @@ use App\Http\Controllers\InsertProjectController;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
+use App\Domain\Projects\CreateProjectAction;
 
 class ProjectController extends Controller
 {
@@ -52,16 +53,27 @@ class ProjectController extends Controller
     * @param  \App\Todo $todo 
     * @return App\Models\Project;
     **/ 
-    public function store(StoreProjectRequest $request, Project $project)
+
+    public function store(StoreProjectRequest $request, CreateProjectAction $action)
     {
-        Project::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'author' => $request->input('author'),
-            'status' => $request->input('status'),
+        $action->handle([
+          'title' => $request->input('title'),
+          'description' => $request->input('description'),
+          'author' => $request->input('author'),
+          'status' => $request->input('status'),
         ]);
 
         return redirect()
-            ->route('projects.index');                    
+            ->route('projects.index');
+
+        // Project::create([
+        //     'title' => $request->input('title'),
+        //     'description' => $request->input('description'),
+        //     'author' => $request->input('author'),
+        //     'status' => $request->input('status'),
+        // ]);
+
+        // return redirect()
+        //     ->route('projects.index');                    
     }
 }
